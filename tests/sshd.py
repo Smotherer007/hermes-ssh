@@ -93,8 +93,20 @@ class TestServer:
         shutil.rmtree(self.dir, ignore_errors=True)
 
     def kill_connections(self) -> None:
-        """End every per-connection sshd child, like a dropped network path would."""
-        subprocess.run(["pkill", "-KILL", "-P", str(self.process.pid)], capture_output=True)
+        """End every per-connection sshd process, like a dropped network path would.
+
+        The whole tree, not just the listener's children: each connection is a
+        monitor ("sshd: user [priv]") with a child that holds the socket. Killed
+        alone, the monitor leaves that child orphaned and the connection alive.
+        That happens when sshd runs without root, as on CI runners and macOS.
+        """
+        descendants, frontier = [], [str(self.process.pid)]
+        while frontier:
+            found = subprocess.run(["pgrep", "-P", ",".join(frontier)], capture_output=True, text=True).stdout.split()
+            descendants += found
+            frontier = found
+        if descendants:
+            subprocess.run(["kill", "-KILL", *descendants], capture_output=True)
 
 
 def start_test_server(generate_key_pair) -> Optional[TestServer]:
