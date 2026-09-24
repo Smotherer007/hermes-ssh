@@ -1,0 +1,47 @@
+name: ssh
+version: 1.0.0
+description: "SSH for Hermes: run commands, move files over SFTP, forward ports, and switch hosts from password to key login -- no ssh binary needed."
+author: Patrick Weppelmann
+kind: standalone
+manifest_version: 2
+api_version: 1
+license: MIT
+homepage: https://github.com/Smotherer007/hermes-ssh
+tags: [ssh, sftp, remote, tunnel, devops]
+provides_tools:
+  - ssh_setup
+  - ssh_status
+  - ssh_profile
+  - ssh_exec
+  - ssh_list
+  - ssh_upload
+  - ssh_download
+  - ssh_keygen
+  - ssh_authorize
+  - ssh_doctor
+  - ssh_tunnel
+provides_hooks:
+  - pre_tool_call
+  - pre_llm_call
+  - on_session_finalize
+optional_env:
+  - name: HERMES_SSH_CONFIG
+    description: "Path to the profile file (default: $HERMES_HOME/ssh-config.json)"
+config_schema:
+  dangerous_commands:
+    type: str
+    choices: [confirm, open, block]
+    default: confirm
+    label: "Dangerous commands"
+    description: "ssh_exec commands that Hermes' own detector flags (rm -rf, curl | sh, disk formatting, reboot ...). confirm: ask a human. block: refuse. open: run."
+  safety_level:
+    type: str
+    choices: [open, confirm, readonly]
+    default: open
+    label: "Safety level"
+    description: "ssh_exec, ssh_upload, ssh_authorize and starting/defining tunnels. open: run directly. confirm: ask a human first. readonly: blocked."
+  readonly_profiles:
+    type: list
+    default: []
+    label: "Read-only profiles"
+    description: "SSH profile names (e.g. prod) where commands, uploads and tunnels are blocked."

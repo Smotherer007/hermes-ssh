@@ -1,0 +1,14 @@
+[project]
+name = "hermes-ssh"
+version = "1.0.0"
+description = "SSH plugin for Hermes Agent: commands, SFTP, port forwarding and key setup without an ssh binary."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Patrick Weppelmann" }]
+requires-python = ">=3.11"
+# Installed into Hermes' virtualenv by `hermes plugins install`, under Hermes'
+# own constraints. cryptography and pynacl are already part of Hermes.
+dependencies = ["paramiko>=3.5,<6"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pyyaml>=6,<7"]
