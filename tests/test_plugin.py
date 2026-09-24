@@ -48,7 +48,7 @@ def test_registration_matches_manifest():
     ctx = FakeContext()
     plugin.register(ctx)
     data = manifest()
-    assert data["name"] == "ssh"
+    assert data["name"] == "hermes-remote-ssh"
     assert sorted(ctx.tools) == sorted(data["provides_tools"])
     assert sorted(ctx.hooks) == sorted(data["provides_hooks"])
     assert {t[0] for t in ctx.tools.values()} == {"ssh"}

@@ -244,7 +244,7 @@ class TestSafety:
     def test_confirm_every_change(self):
         hook = self.hook(safety_level="confirm")
         directive = hook(tool_name="ssh_exec", args={"command": "uptime", "profile": "web"})
-        assert directive == {"action": "approve", "message": "Run on web: uptime", "rule_key": "ssh:ssh_exec:web"}
+        assert directive == {"action": "approve", "message": "Run on web: uptime", "rule_key": "hermes-remote-ssh:ssh_exec:web"}
         assert hook(tool_name="ssh_tunnel", args={"action": "start", "name": "db"})["action"] == "approve"
 
     def test_readonly_level_and_profiles(self):

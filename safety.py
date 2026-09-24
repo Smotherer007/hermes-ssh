@@ -24,7 +24,7 @@ from __future__ import annotations
 import re
 from typing import Any, Callable, Iterable, Optional, Tuple
 
-PLUGIN = "ssh"
+PLUGIN = "hermes-remote-ssh"
 LEVELS = ("open", "confirm", "readonly")
 DANGEROUS_MODES = ("confirm", "open", "block")
 

@@ -1,4 +1,4 @@
-name: ssh
+name: hermes-remote-ssh
 version: 1.0.0
 description: "SSH for Hermes: run commands, move files over SFTP, forward ports, and switch hosts from password to key login -- no ssh binary needed."
 author: Patrick Weppelmann

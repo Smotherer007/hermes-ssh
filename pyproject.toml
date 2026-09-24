@@ -1,5 +1,5 @@
 [project]
-name = "hermes-ssh"
+name = "hermes-remote-ssh"
 version = "1.0.0"
 description = "SSH plugin for Hermes Agent: commands, SFTP, port forwarding and key setup without an ssh binary."
 readme = "README.md"

@@ -1,4 +1,4 @@
-# hermes-ssh
+# hermes-remote-ssh
 
 SSH plugin for [Hermes Agent](https://github.com/NousResearch/hermes-agent).
 
@@ -10,10 +10,10 @@ This is the Hermes port of [pi-ssh](https://github.com/Smotherer007/pi-ssh). The
 
 ```bash
 hermes plugins install Smotherer007/hermes-ssh
-hermes plugins enable ssh
+hermes plugins enable hermes-remote-ssh
 ```
 
-The plugin's name is `ssh`. The Hermes catalog already has an unrelated plugin called `hermes-ssh`. Installing also installs paramiko.
+The repository is `hermes-ssh`; the plugin, and the catalog key it would take, are `hermes-remote-ssh` — the catalog already has an unrelated plugin called `hermes-ssh`. Installing also installs paramiko.
 
 **The install-time security scan blocks this plugin.** Hermes' scanner treats every occurrence of `authorized_keys` as a critical "SSH backdoor" finding, and `--force` does not override that. But installing a public key in `authorized_keys` is exactly what `ssh_authorize` does, on purpose, when you ask it to. This plugin does not hide the string to get past the scanner. Instead, read the code, then install with the scan turned off for this one step:
 
@@ -127,7 +127,7 @@ The system prompt names the configured hosts and how they authenticate. Password
 
 ## What is different from pi-ssh
 
-- **Plugin name:** `ssh` instead of `hermes-ssh`, see Installation.
+- **Plugin name:** `hermes-remote-ssh` instead of `hermes-ssh`, see Installation.
 - **SSH library:** paramiko instead of ssh2. Keys are generated with `cryptography`, which paramiko already needs.
 - **Default key path:** `~/.ssh/id_ed25519_hermes_<profile>` instead of `…_pi_<profile>`. Keys pi already made keep working, because the profile stores the path.
 - **Tunnels:** they end with the Hermes session that opened them, and the widget is replaced by a turn reminder.

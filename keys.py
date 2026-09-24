@@ -70,7 +70,7 @@ def generate_key_pair(comment: str) -> GeneratedKeyPair:
 
 
 def default_key_comment(user: str, host: str) -> str:
-    return f"hermes-ssh {user}@{host}"
+    return f"hermes-remote-ssh {user}@{host}"
 
 
 def local_identity() -> tuple:
